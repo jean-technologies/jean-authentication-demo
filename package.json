@@ -1,18 +1,25 @@
 {
   "name": "jean-memory-demo",
   "version": "1.0.0",
-  "description": "🧠 5-Minute AI Chat Demo - Add personalized AI memory to any React app in 5 lines of code",
+  "description": "🔐 Minimal viable authentication with Jean Memory - secure OAuth 2.1 PKCE in just a few lines of code",
   "repository": {
     "type": "git",
     "url": "https://github.com/jonathan-politzki/jean-authentication-demo.git"
   },
-  "keywords": ["jean-memory", "ai", "memory", "chat", "oauth", "react", "demo"],
+  "keywords": [
+    "jean-memory",
+    "authentication",
+    "oauth",
+    "react",
+    "minimal",
+    "demo"
+  ],
   "author": "Jean Memory Team",
   "license": "MIT",
-  "homepage": "https://github.com/jonathan-politzki/jean-authentication-demo#readme",
+  "homepage": ".",
   "private": true,
   "dependencies": {
-    "@jeanmemory/react": "^1.8.7",
+    "@jeanmemory/react": "^1.11.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.7.0",
     "@testing-library/react": "^16.3.0",

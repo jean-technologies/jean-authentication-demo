@@ -1,17 +1,17 @@
-# 🧠 Jean Memory Demo - 5-Minute AI Chat
+# 🔐 Jean Memory Authentication Demo
 
-**A complete demo showing how to add personalized AI memory to any React application in just 5 lines of code.**
+**Minimal viable authentication with Jean Memory - secure OAuth 2.1 in just a few lines of code.**
 
 ---
 
 ## 🎯 What This Demo Shows
 
-This repository demonstrates:
-- ✅ **Secure OAuth 2.1 authentication** with Google sign-in
+This repository demonstrates the **simplest possible authentication** using Jean Memory:
+- ✅ **Secure OAuth 2.1 PKCE authentication** with Google sign-in  
 - ✅ **Persistent user sessions** that survive browser refreshes
-- ✅ **Personalized AI chat** that remembers user context across conversations
 - ✅ **Universal identity** - same user account across all Jean Memory apps
 - ✅ **Zero authentication complexity** for developers
+- ✅ **Minimal code** - just the essentials
 
 ## 🚀 Quick Start
 
@@ -44,47 +44,55 @@ npm start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) and you'll see:
-- A "Sign In with Jean" button
-- After authentication: a fully functional AI chat interface
-- AI that remembers everything you tell it
+- A clean "Sign In with Jean" button
+- After authentication: user information and sign-out functionality
+- Persistent sessions across browser refreshes
 
 ---
 
 ## 💡 How It Works
 
-### The 5 Lines That Changed Everything
+### The Minimal Authentication Pattern
 
 ```tsx
 import { JeanProvider, SignInWithJean, useJean } from '@jeanmemory/react';
 
-<JeanProvider apiKey="jean_sk_your_key">
-  <SignInWithJean onSuccess={(user) => console.log('Authenticated!')}>
-    Sign In with Jean
-  </SignInWithJean>
-</JeanProvider>
+function App() {
+  return (
+    <JeanProvider apiKey="jean_sk_your_key">
+      <AuthenticatedApp />
+    </JeanProvider>
+  );
+}
+
+function AuthenticatedApp() {
+  const { isAuthenticated, user, signOut } = useJean();
+
+  if (!isAuthenticated) {
+    return (
+      <SignInWithJean onSuccess={(user) => console.log('User signed in:', user)}>
+        <button>Sign In with Jean</button>
+      </SignInWithJean>
+    );
+  }
+
+  return (
+    <div>
+      <h1>Welcome, {user?.name}!</h1>
+      <button onClick={signOut}>Sign Out</button>
+    </div>
+  );
+}
 ```
 
-That's literally it. Everything else happens automatically:
+That's it! A complete authentication system in ~20 lines.
 
 ### Under the Hood
 1. **OAuth 2.1 PKCE Flow** - Secure authentication with Google (no client secrets needed)
-2. **Session Persistence** - Users stay logged in across browser refreshes and tabs
+2. **Session Persistence** - Users stay logged in across browser refreshes and tabs  
 3. **Universal Identity** - Same user account across all Jean Memory applications
-4. **Automatic API Requests** - All memory queries include user context automatically
+4. **JWT Token Management** - Automatic token handling and refresh
 5. **Error Recovery** - Handles token expiration and network issues gracefully
-
----
-
-## 🧪 Try These Examples
-
-Once authenticated, try asking:
-
-- **"What did I work on recently?"** - See how Jean remembers your work context
-- **"Remember that I prefer TypeScript"** - Add a new memory
-- **"What are my current projects?"** - Retrieve stored information
-- **"Help me plan my week"** - Get personalized assistance
-
-Each conversation builds on previous ones, creating a continuous memory thread.
 
 ---
 
@@ -92,40 +100,30 @@ Each conversation builds on previous ones, creating a continuous memory thread.
 
 ### Core Components
 
-**`App.tsx`** - Main application with authentication and chat interface
+**`App.tsx`** - Minimal authentication example (only 30 lines!)
 - `JeanProvider` - Wraps the app and manages authentication state
-- `SignInWithJean` - Handles OAuth 2.1 PKCE flow automatically
-- `useJean` hook - Provides access to authenticated user and chat functionality
+- `SignInWithJean` - Handles OAuth 2.1 PKCE flow automatically  
+- `useJean` hook - Provides access to authenticated user and sign-out functionality
 
 ### Key Features Demonstrated
 
-1. **Conditional Rendering** - Shows sign-in UI vs. authenticated chat interface
-2. **Real-time Chat** - Messages appear instantly with loading states
-3. **Session Persistence** - Refresh the page and stay logged in
-4. **Error Handling** - Graceful handling of authentication and API errors
-5. **User Context** - AI responses are personalized based on user history
+1. **Conditional Rendering** - Shows sign-in UI vs. authenticated interface
+2. **Session Persistence** - Refresh the page and stay logged in
+3. **User Information** - Access to user name, email, and auth status
+4. **Sign Out** - Clean sign-out with state reset
 
 ---
 
 ## 🎨 Customization
 
-### Styling the Sign-In Button
+### Custom Sign-In Button
 
 ```tsx
-<SignInWithJean 
-  className="custom-signin-button"
-  onSuccess={(user) => console.log('Signed in:', user)}
->
-  <span>🔐 Custom Sign In Button</span>
+<SignInWithJean onSuccess={(user) => console.log('Signed in:', user)}>
+  <button className="my-custom-button">
+    🔐 Sign In with Jean
+  </button>
 </SignInWithJean>
-```
-
-### Custom Chat UI
-
-```tsx
-const { sendMessage, messages, isAuthenticated } = useJean();
-
-// Build your own chat interface using these primitives
 ```
 
 ### Environment Variables
@@ -151,15 +149,6 @@ When deploying to production:
 - ✅ Set proper CORS origins in Jean Memory dashboard
 - ✅ Enable HTTPS for OAuth redirects
 - ✅ Test authentication flow in production environment
-- ✅ Monitor authentication success rates
-
----
-
-## 📚 Documentation
-
-- **Jean Memory Docs**: [docs.jeanmemory.com](https://docs.jeanmemory.com)
-- **React SDK Guide**: [Complete implementation guide](https://docs.jeanmemory.com/sdk/react)
-- **Authentication**: [OAuth 2.1 details](https://docs.jeanmemory.com/authentication)
 
 ---
 
@@ -188,50 +177,25 @@ function App() {
 }
 ```
 
-**CORS errors in production**
-- Add your production domain to allowed origins in Jean Memory dashboard
-- Ensure HTTPS is enabled for OAuth redirects
-
----
-
-## 🏆 Success Metrics
-
-After running this demo, you should see:
-
-- ✅ **Sub-5 minute setup time**
-- ✅ **Zero authentication complexity**  
-- ✅ **Persistent sessions across browser restarts**
-- ✅ **Personalized AI responses based on user context**
-- ✅ **Universal user identity across applications**
-- ✅ **Production-ready security (OAuth 2.1 PKCE)**
-
----
-
-## 📞 Support
-
-- **GitHub Issues**: [Report bugs or request features](https://github.com/jean-technologies/jean-memory/issues)
-- **Discord Community**: [Join our developer community](https://discord.gg/jeanmemory)
-- **Email Support**: support@jeanmemory.com
-
 ---
 
 ## 🎉 What's Next?
 
-Congratulations! You've successfully implemented personalized AI memory in a React application. 
+You now have **minimal viable authentication** with Jean Memory! 
 
-### Extend This Demo:
-- Add memory management features
-- Integrate with your existing user system
-- Build custom chat interfaces
+### Next Steps:
+- Add Jean Memory chat functionality with `JeanChatComplete`
+- Integrate memory features with `useJean` tools
+- Build custom user interfaces
 - Deploy to production
 
-### Real-World Applications:
-- Customer support with memory
-- Personalized learning assistants
-- Context-aware productivity tools
-- Multi-session project continuity
+### Use Cases:
+- User authentication for any React app
+- Personalized AI applications  
+- Cross-application identity management
+- Secure session management
 
-**The future of AI is personal, and it starts with memory.** 🚀
+**Ready to add AI memory?** Check out the [full Jean Memory documentation](https://docs.jeanmemory.com) 🚀
 
 ---
 
