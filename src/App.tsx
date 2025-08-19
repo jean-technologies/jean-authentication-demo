@@ -1,8 +1,7 @@
 import { JeanProvider, SignInWithJean, useJean } from '@jeanmemory/react';
 import './App.css';
 
-// Test API key inheritance by using a WRONG key in Provider
-const WRONG_API_KEY = "jean_sk_wrong_key_should_fail";
+// Get API key from environment variable or use placeholder
 const JEAN_API_KEY = process.env.REACT_APP_JEAN_API_KEY || "jean_sk_your_api_key_here";
 
 function App() {
