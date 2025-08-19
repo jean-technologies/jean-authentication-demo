@@ -18,8 +18,8 @@ This repository demonstrates:
 ### 1. Clone and Install
 
 ```bash
-git clone https://github.com/your-username/jean-memory-demo.git
-cd jean-memory-demo
+git clone https://github.com/jonathan-politzki/jean-authentication-demo.git
+cd jean-authentication-demo
 npm install
 ```
 

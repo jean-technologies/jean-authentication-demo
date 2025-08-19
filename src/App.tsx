@@ -3,7 +3,7 @@ import { JeanProvider, SignInWithJean, useJean } from '@jeanmemory/react';
 import './App.css';
 
 // Replace with your actual API key
-const JEAN_API_KEY = "jean_sk_your_api_key_here";
+const JEAN_API_KEY = "jean_sk_HbMsS3EEsZtlIcxlivYM0yPy6auK3ThYek9QMeX8lOo";
 
 function App() {
   return (
